@@ -7,10 +7,16 @@ permissions:
   id-token: write
   contents: read
 
+env:
+  APPLICATION_FOLDER: client
+
 jobs:
   build:
     name: Build and Package
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [16.x]
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v3
@@ -22,14 +28,24 @@ jobs:
           role-to-assume: ${{ secrets.AWS_DEPLOY_ROLE }}
           role-session-name: OIDC-Session
 
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Install yarn
+        run: npm install -g yarn
+
       - name: chmod
         run: chmod -R +x ./.github
 
       - name: Build and Package
         id: package
+        working-directory: ${{ env.APPLICATION_FOLDER }}
         run: $GITHUB_WORKSPACE/.github/scripts/build.sh
 
       - name: Upload Artifact to S3
+        working-directory: ${{ env.APPLICATION_FOLDER }}
         run: aws s3 cp *.txt s3://${{ secrets.AWS_DEPLOY_BUCKET }}
         shell: bash
 

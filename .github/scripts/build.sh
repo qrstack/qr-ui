@@ -1,4 +1,9 @@
 #!/bin/bash
 set -xe
 
-echo "Hello CodeDeploy!" > text.txt
+cd ~/work/qrstack/qr-ui/client/
+#
+yarn install
+yarn run build
+
+ls -a
