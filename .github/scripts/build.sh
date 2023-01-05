@@ -1,9 +1,11 @@
 #!/bin/bash
 set -xe
 
-cd ~/work/qrstack/qr-ui/client/
-#
-yarn install
-yarn run build
+# prepare tarfile before zip
+if [ -f "$TAR_FILE" ]; then
+  rm "$TAR_FILE"
+fi
+touch "$TAR_FILE"
 
-ls -a
+# zip
+tar --exclude={"node_modules",".next","$TAR_FILE"} -czf "$TAR_FILE" .
