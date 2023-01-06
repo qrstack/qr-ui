@@ -23,7 +23,7 @@ jobs:
         with:
           aws-region: ${{ secrets.AWS_REGION }}
           role-to-assume: ${{ secrets.AWS_DEPLOY_ROLE }}
-          role-session-name: OIDC-Session
+          role-session-name: build-and-upload-to-s3-session
 
       - name: Change Permissions
         run: chmod -R +x ./.github
@@ -54,7 +54,7 @@ jobs:
         with:
           aws-region: ${{ secrets.AWS_REGION }}
           role-to-assume: ${{ secrets.AWS_DEPLOY_ROLE }}
-          role-session-name: OIDC-Session
+          role-session-name: codedeploy-deployment-session
 
       - name: CodeDeploy
         run: |
