@@ -2,14 +2,17 @@
 set -xe
 
 # Delete the old directory as needed.
-if [ -d /usr/local/codedeployresources ]; then
-    rm -rf /usr/local/codedeployresources/
+export CODEDEPLOY_DIR=/usr/local/codedeployresources
+
+if [ -d $CODEDEPLOY_DIR ]; then
+    rm -rf $CODEDEPLOY_DIR
 fi
+mkdir -vp $CODEDEPLOY_DIR
 
-mkdir -vp /usr/local/codedeployresources
+export BASE_DIR=/home/ec2-user/work/qrstack/qr-ui
 
-if [ -d /home/ec2-user/work/qrstack/qr-ui ]; then
-    rm -rf /home/ec2-user/work/qrstack/qr-ui/
+if [ -d $BASE_DIR ]; then
+    rm -rf $BASE_DIR
 fi
-
-mkdir -vp /home/ec2-user/work/qrstack/qr-ui
+mkdir -vp $BASE_DIR
+chmod -R 777 $BASE_DIR

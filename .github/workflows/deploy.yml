@@ -9,7 +9,7 @@ permissions:
 
 jobs:
   build:
-    name: Build and Upload to S3
+    name: Build and Deploy
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
