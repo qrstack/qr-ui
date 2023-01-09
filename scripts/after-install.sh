@@ -1,10 +1,19 @@
 #!/bin/bash
 set -xe
 
+export BASE_DIR=~/work/qrstack/qr-ui
 
-# Copy war file from S3 bucket to tomcat webapp folder
-#aws s3 cp s3://##s3-bucket##/SpringBootHelloWorldExampleApplication.war /usr/local/tomcat9/webapps/SpringBootHelloWorldExampleApplication.war
+# Clean directory
+if [ -d $BASE_DIR ]; then
+  rm -rf $BASE_DIR
+fi
+mkdir -vp $BASE_DIR
 
+# Copy bundle from S3 bucket
+aws s3 cp s3://$BUNDLE_BUCKET/$BUNDLE_KEY $BASE_DIR/$BUNDLE_KEY
 
-# Ensure the ownership permissions are correct.
-#chown -R tomcat:tomcat /usr/local/tomcat9/webapps
+# Extract bundle
+tar -xvf $BASE_DIR/$BUNDLE_KEY
+
+# Ensure the ownership permissions are correct
+chown -R $BASE_DIR
