@@ -14,6 +14,3 @@ aws s3 cp s3://$BUNDLE_BUCKET/$BUNDLE_KEY $BASE_DIR/$BUNDLE_KEY
 
 # Extract bundle
 tar -xvf $BASE_DIR/$BUNDLE_KEY
-
-# Ensure the ownership permissions are correct
-chown -R $BASE_DIR

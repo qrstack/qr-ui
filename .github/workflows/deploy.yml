@@ -35,23 +35,7 @@ jobs:
         run: aws s3 cp ${{ secrets.BUNDLE_NAME }} s3://${{ secrets.AWS_DEPLOY_BUCKET }}
         shell: bash
 
-  deploy:
-    name: Create CodeDeploy Deployment
-    needs: build
-    runs-on: ubuntu-latest
-    environment: development
-    steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v3
-
-      - name: Configure AWS Credentials
-        uses: aws-actions/configure-aws-credentials@v1
-        with:
-          aws-region: ${{ secrets.AWS_REGION }}
-          role-to-assume: ${{ secrets.AWS_DEPLOY_ROLE }}
-          role-session-name: codedeploy-deployment-session
-
-      - name: Create Deployment
+      - name: Create CodeDeploy Deployment
         id: deploy
         run: |
           aws deploy create-deployment \
