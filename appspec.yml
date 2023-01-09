@@ -1,26 +1,26 @@
 version: 0.0
 os: linux
 files:
-  - source: /aws
+  - source: /scripts
     destination: /usr/local/codedeployresources
 hooks:
   ApplicationStop:
-    - location: aws/scripts/application-stop.sh
-      timeout: 300
+    - location: scripts/application-stop.sh
+      timeout: 120
       runas: root
   BeforeInstall:
-    - location: aws/scripts/before-install.sh
-      timeout: 300
+    - location: scripts/before-install.sh
+      timeout: 120
       runas: root
   AfterInstall:
-    - location: aws/scripts/after-install.sh
-      timeout: 300
+    - location: scripts/after-install.sh
+      timeout: 120
       runas: root
   ApplicationStart:
-    - location: aws/scripts/application-start.sh
-      timeout: 300
+    - location: scripts/application-start.sh
+      timeout: 120
       runas: root
   ValidateService:
-    - location: aws/scripts/validate-service.sh
-      timeout: 300
+    - location: scripts/validate-service.sh
+      timeout: 120
       runas: root

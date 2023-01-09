@@ -2,10 +2,10 @@
 set -xe
 
 # prepare tarfile before zip
-if [ -f "$tgz_filename" ]; then
-  rm "$tgz_filename"
+if [ -f "$bundle_name" ]; then
+  rm "$bundle_name"
 fi
-touch "$tgz_filename"
+touch "$bundle_name"
 
 # zip
-tar --exclude={"node_modules",".next","$tgz_filename"} -czf "$tgz_filename" .
+tar --exclude={"node_modules",".next","$bundle_name"} -cf "$bundle_name" .
