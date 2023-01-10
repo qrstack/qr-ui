@@ -9,10 +9,9 @@ if [ -d $CODEDEPLOY_DIR ]; then
 fi
 mkdir -vp $CODEDEPLOY_DIR
 
-export BASE_DIR=/home/ec2-user/work/qrstack/qr-ui
+export BASE_DIR=/home/ubuntu/work/qrstack/qr-ui
 
 if [ -d $BASE_DIR ]; then
     rm -rf $BASE_DIR
 fi
 mkdir -vp $BASE_DIR
-chmod -R 777 $BASE_DIR

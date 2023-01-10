@@ -2,7 +2,7 @@ version: 0.0
 os: linux
 files:
   - source: client
-    destination: /home/ec2-user/work/qrstack/qr-ui
+    destination: /home/ubuntu/work/qrstack/qr-ui
   - source: /scripts
     destination: /usr/local/codedeployresources
 hooks:
